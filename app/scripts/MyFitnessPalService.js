@@ -49,9 +49,32 @@ gerrrard00.MyFitnessPalService = (function () {
 	   return cleanData;
 	}
 
-	function getWeightData() {
+	//TODO: accept a callback
+	function getWeightData( dataReceiver, errorReceiver ) {
 		//TODO: really get data from MyFitnessPal
-		return cleanRawData(fakeWeightData.data);
+
+		//TODO: don't hardcode request url
+		var targetUrl = "http://www.myfitnesspal.com/reports/results/progress/1/365.json?report_name=Weight&;"
+
+
+		$.ajax(targetUrl)
+		  .done(function(response) {
+		    console.log("mfp -> success");
+
+		    var cleanData = cleanRawData(response.data);
+
+		    dataReceiver(cleanData);
+		  })
+		  .fail(function( jqXHR, textStatus) {
+		    console.log( "mfp -> error" );
+		    errorReceiver('Error talking to MyFitnessPal: ' + textStatus);
+		  })
+		  .always(function() {
+		    console.log( "mfp -> complete" );
+		  });
+
+		//fake data 
+		//dataReceiver(cleanRawData(fakeWeightData.data));
 	}
 
 	return {
@@ -59,7 +82,7 @@ gerrrard00.MyFitnessPalService = (function () {
 	}
 }());
 
-//TODO: remove this fake data
+//TODO: remove this fake data and inject real or fake service into content script
 var fakeWeightData = {'chartType': 'line',
  'title': 'Weight',
  'category': 'progress',

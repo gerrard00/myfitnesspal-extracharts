@@ -12,8 +12,11 @@ if (existingChart) {
 
 	displayDiv = existingChart.after('<div id="extraCharts">gerrard</div>');
 
-	var data = gerrrard00.MyFitnessPalService.getWeightData();
-	console.log(data[0]);
+	var data = gerrrard00.MyFitnessPalService.getWeightData(function (data) {
+		console.log(data[0]);
+	}, function (error) {
+		console.log("Error!" + error);
+	});
 }
 
 console.log('done now!')
