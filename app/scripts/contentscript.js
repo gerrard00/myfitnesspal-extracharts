@@ -1,24 +1,28 @@
 'use strict';
 
 (function() {
-console.log('\'Allo \'Allo! Content script');
+	console.log(gerrrard00);
+	
+	var loadService = gerrrard00.MyFitnessPalService;
+	var chartDisplayer = gerrrard00.charts.ExponentiallySmoothedMovingAverageChart;
 
-var displayDiv;
+	var displayDiv;
 
-var existingChart = $('#highchart');
+	var existingChart = $('#highchart');
 
-//if the highcharts chart isn't there, we assume that we're on the wrong page (for now).
-if (existingChart) {
+	//if the highcharts chart isn't there, we assume that we're on the wrong page (for now).
+	if (existingChart) {
+		displayDiv = existingChart.after('<div id="extraCharts">gerrard</div>');
 
-	displayDiv = existingChart.after('<div id="extraCharts">gerrard</div>');
+		var data = loadService.getWeightData(function (data) {
+		
+			chartDisplayer.displayChart(displayDiv, data);
 
-	var data = gerrrard00.MyFitnessPalService.getWeightData(function (data) {
-		console.log(data[0]);
-	}, function (error) {
-		console.log("Error!" + error);
-	});
-}
+		}, function (error) {
+			console.log("Error!" + error);
+		});
+	}
 
-console.log('done now!')
+	console.log('done now!')
 }());
 

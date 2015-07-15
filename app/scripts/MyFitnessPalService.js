@@ -51,8 +51,6 @@ gerrrard00.MyFitnessPalService = (function () {
 
 	//TODO: accept a callback
 	function getWeightData( dataReceiver, errorReceiver ) {
-		//TODO: really get data from MyFitnessPal
-
 		//TODO: don't hardcode request url
 		var targetUrl = "http://www.myfitnesspal.com/reports/results/progress/1/365.json?report_name=Weight&;"
 

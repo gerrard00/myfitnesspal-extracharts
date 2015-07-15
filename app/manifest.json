@@ -33,10 +33,14 @@
         "bower_components/c3/c3.js",
         "bower_components/jquery/dist/jquery.js",
         "scripts/MyFitnessPalService.js",
+        "scripts/ExponentiallySmoothedMovingAverageChart.js",
         "scripts/contentscript.js"
       ],
       "run_at": "document_end",
       "all_frames": false
     }
+  ], 
+  "permissions": [
+    "http://*.myfitnesspal.com/"
   ]
 }
