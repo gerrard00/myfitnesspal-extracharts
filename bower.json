@@ -1,7 +1,10 @@
 {
   "name": "myfitnesspal-extra-charts",
   "version": "0.0.0",
-  "dependencies": {},
+  "dependencies": {
+    "c3": "~0.4.10",
+    "jquery": "~2.1.4"
+  },
   "devDependencies": {
     "chai": "~3.0.0",
     "mocha": "~2.2.5"

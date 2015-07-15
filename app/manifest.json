@@ -30,6 +30,8 @@
         "https://*/*"
       ],
       "js": [
+        "bower_components/c3/c3.js",
+        "bower_components/jquery/dist/jquery.js",
         "scripts/contentscript.js"
       ],
       "run_at": "document_end",
