@@ -19,7 +19,7 @@
       "19": "images/icon-19.png",
       "38": "images/icon-38.png"
     },
-    "default_title": "MyFitnessPal Extra Charts",
+    "default_title": "Extra Charts for MyFitnessPal",
     "default_popup": "popup.html"
   },
   "options_page": "options.html",
