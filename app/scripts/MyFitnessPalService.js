@@ -50,12 +50,11 @@ gerrrard00.MyFitnessPalService = (function () {
 	}
 
 	//TODO: accept a callback
-	function getWeightData( dataReceiver, errorReceiver ) {
-		//TODO: don't hardcode request url
-		var targetUrl = "http://www.myfitnesspal.com/reports/results/progress/1/365.json?report_name=Weight&;"
+	function getWeightData( sourceUrl, dataReceiver, errorReceiver ) {
 
+		console.log('source url: ' + sourceUrl);
 
-		$.ajax(targetUrl)
+		$.ajax(sourceUrl)
 		  .done(function(response) {
 		    console.log("mfp -> success");
 

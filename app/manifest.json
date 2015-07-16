@@ -45,6 +45,7 @@
     }
   ], 
   "permissions": [
+    "webRequest",
     "http://*.myfitnesspal.com/"
   ]
 }
