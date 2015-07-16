@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <!-- build:css styles/vendor.css -->
+    <!-- bower:css -->
+    <link href="../app/bower_components/c3/c3.css" rel="stylesheet">
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css styles/main.css -->
+    <link href="../app/styles/main.css" rel="stylesheet">
+    <!-- endbuild -->
+  </head>
+  <body>
+    <h1>Test Chart</h1>
+
+    <div id="display"></div>
+    <!-- build:js scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="../app/bower_components/c3/c3.js"></script>
+    <script src="../app/bower_components/d3/d3.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:js scripts/popup.js -->
+    <script src="../app/scripts/ExponentiallySmoothedMovingAverageChart.js"></script>
+    <!-- <script src="scripts/MyFitnessPalDataScrubber.js"></script>-->
+    <!-- endbuild -->
+
+    <script type="text/javascript">
+
+    
+
+    var testData = [{"date":"2014-10-21","total":271},{"date":"2014-10-27","total":270.5},{"date":"2014-11-03","total":267.5},{"date":"2014-11-10","total":268},{"date":"2014-11-17","total":264.5},{"date":"2014-11-24","total":265},{"date":"2014-12-01","total":256.5},{"date":"2014-12-08","total":254},{"date":"2014-12-15","total":251},{"date":"2014-12-19","total":249.5},{"date":"2014-12-22","total":251.5},{"date":"2014-12-26","total":249},{"date":"2014-12-29","total":252},{"date":"2015-01-05","total":249},{"date":"2015-01-12","total":248},{"date":"2015-01-19","total":244.5},{"date":"2015-01-26","total":243.5},{"date":"2015-02-02","total":242},{"date":"2015-02-08","total":241},{"date":"2015-02-09","total":244},{"date":"2015-02-16","total":243.5},{"date":"2015-02-23","total":237},{"date":"2015-03-02","total":233},{"date":"2015-03-09","total":229},{"date":"2015-03-16","total":235.5},{"date":"2015-03-23","total":228.5},{"date":"2015-03-30","total":231.5},{"date":"2015-04-06","total":229.5},{"date":"2015-04-14","total":231},{"date":"2015-04-18","total":224},{"date":"2015-04-20","total":225.5},{"date":"2015-04-27","total":223.5},{"date":"2015-05-04","total":226},{"date":"2015-05-11","total":226.2},{"date":"2015-05-18","total":223.4},{"date":"2015-05-26","total":226.4},{"date":"2015-06-01","total":223.6},{"date":"2015-06-10","total":222.2},{"date":"2015-06-15","total":222.6},{"date":"2015-06-22","total":223.4},{"date":"2015-06-29","total":224},{"date":"2015-07-06","total":223.2},{"date":"2015-07-07","total":221},{"date":"2015-07-13","total":222.4},{"date":"2015-07-15","total":218.8}];
+
+
+    var cutoffDate = Date.parse('2015-01-01');
+
+    testData = testData.filter(function (entry) {
+        return Date.parse(entry.date) >= cutoffDate;
+    });
+     
+    gerrard00.charts.ExponentiallySmoothedMovingAverageChart.displayChart('#display', testData);
+    </script>
+  </body>
+</html>
