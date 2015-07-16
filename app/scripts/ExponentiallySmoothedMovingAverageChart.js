@@ -18,9 +18,19 @@ gerrard00.charts.ExponentiallySmoothedMovingAverageChart = (function () {
 
             //inspired by hacker diet: 
             //https://www.fourmilab.ch/hackdiet/www/subsubsection1_4_1_0_8_3.html
-            return previousExponentialMovingAverage +
-                ((1 - smoothingFactor) *
-                    (currentObservation - previousExponentialMovingAverage));
+            console.log(typeof previousExponentialMovingAverage);
+            console.log(typeof currentObservation);
+
+
+            var result = parseFloat(previousExponentialMovingAverage +
+                (
+                    (1 - smoothingFactor) *
+                    (currentObservation - previousExponentialMovingAverage)
+                )).toFixed(2);
+
+            console.log(typeof result);
+
+            return result;
         }
 
     function displayChart( displaySelector, data ) {
