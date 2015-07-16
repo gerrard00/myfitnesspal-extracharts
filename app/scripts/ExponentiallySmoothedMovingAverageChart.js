@@ -14,22 +14,19 @@ gerrard00.charts.ExponentiallySmoothedMovingAverageChart = (function () {
 
             //hacker diet suggests 0.9
             //TODO: make this configurable
-            var smoothingFactor = 0.9;
+            var smoothingFactor = 0.8;
 
             //inspired by hacker diet: 
             //https://www.fourmilab.ch/hackdiet/www/subsubsection1_4_1_0_8_3.html
-            console.log(typeof previousExponentialMovingAverage);
-            console.log(typeof currentObservation);
-
-
-            var result = parseFloat(previousExponentialMovingAverage +
+            var result = previousExponentialMovingAverage +
                 (
                     (1 - smoothingFactor) *
                     (currentObservation - previousExponentialMovingAverage)
-                )).toFixed(2);
+                );
 
-            console.log(typeof result);
-
+            //get two decimal places, toFixed returns string
+            //TODO: this should really be just in c3 or d3 code
+            result = Math.round(result * 100)/100;
             return result;
         }
 
@@ -51,8 +48,6 @@ gerrard00.charts.ExponentiallySmoothedMovingAverageChart = (function () {
         var viewModel = data;
 
         //TODO: figure out the ticks on the x axis
-        //TODO: scatter for the real values? Default scatter has tiny points.
-        console.log(displaySelector);
 
         var chart = c3.generate({
             bindto: displaySelector,
@@ -62,14 +57,25 @@ gerrard00.charts.ExponentiallySmoothedMovingAverageChart = (function () {
                     x: 'date',
                     value: ['total', exponentialMovingAverageFieldName]
                 },
-                types : {
-                    total : 'line'
+                type: 'line',
+                types: {
+                    exponentialMovingAverage: 'spline'
+                },
+                names: {
+                    total: 'Weight',
+                    exponentialMovingAverage: 'Smoothed'
                 }
             },
             axis: {
                 x: {
                     type: 'timeseries'
                 }
+            },
+            tooltip: {
+                grouped: false
+            },
+            point: {
+                r: 5
             }
         });
 

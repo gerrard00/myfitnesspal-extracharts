@@ -1,3 +1,16 @@
 body {
   padding: 20px;
 }
+
+/* customize c3 chart */
+/* hide points on exponentialMovingAverage line, can't find a way via c3js options */
+.c3-circles-exponentialMovingAverage {
+    display: none;
+}
+
+.c3-legend-item-event {
+    border-radius: 5px;
+    border: 1px solid #909090; 
+    padding: 5px;
+    display: inline
+}
