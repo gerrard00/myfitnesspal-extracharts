@@ -2,6 +2,14 @@ body {
   padding: 20px;
 }
 
+.extraChartsTitle {
+    font-family: "Lucida Grande", "Lucida Sans Unicode", Verdana, Arial, Helvetica, sans-serif;
+    font-size:26px;
+    color:#274b6d;
+    fill:#274b6d;
+    text-align: center;
+}
+
 /* customize c3 chart */
 /* hide points on exponentialMovingAverage line, can't find a way via c3js options */
 .c3-circles-exponentialMovingAverage {

@@ -40,7 +40,7 @@
         return Date.parse(entry.date) >= cutoffDate;
     });
      
-    gerrard00.charts.ExponentiallySmoothedMovingAverageChart.displayChart('#display', testData);
+    gerrard00.charts.ExponentiallySmoothedMovingAverageChart.displayChart('#display', { label: "Some fake label", data: testData });
     </script>
 
     <div class="c3-legend-item-event">

@@ -30,9 +30,9 @@ gerrard00.charts.ExponentiallySmoothedMovingAverageChart = (function () {
             return result;
         }
 
-    function displayChart( displaySelector, data ) {
+    function displayChart( displaySelector, dataContainer ) {
 
-        data.forEach(function (currentEntry, index, array) {
+        dataContainer.data.forEach(function (currentEntry, index, array) {
 
             
             currentEntry[exponentialMovingAverageFieldName] =
@@ -45,7 +45,7 @@ gerrard00.charts.ExponentiallySmoothedMovingAverageChart = (function () {
         });
 
         //TODO: instead of modifying data, copy the data to viewModel
-        var viewModel = data;
+        var viewModel = dataContainer.data;
 
         //TODO: figure out the ticks on the x axis
 
@@ -62,7 +62,7 @@ gerrard00.charts.ExponentiallySmoothedMovingAverageChart = (function () {
                     exponentialMovingAverage: 'spline'
                 },
                 names: {
-                    total: 'Weight',
+                    total: dataContainer.label,
                     exponentialMovingAverage: 'Smoothed'
                 }
             },

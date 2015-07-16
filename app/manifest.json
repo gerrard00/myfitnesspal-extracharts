@@ -39,7 +39,8 @@
         "scripts/contentscript.js"
       ],
       "css": [
-        "bower_components/c3/c3.css"
+        "bower_components/c3/c3.css",
+        "styles/main.css"
       ],
       "run_at": "document_end",
       "all_frames": false

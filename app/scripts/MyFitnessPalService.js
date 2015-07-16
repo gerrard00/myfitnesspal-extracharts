@@ -17,7 +17,7 @@ gerrard00.MyFitnessPalService = (function () {
 
             var cleanData = gerrard00.MyFitnessPalDataScrubber.cleanRawData(response.data);
 
-            dataReceiver(cleanData);
+            dataReceiver({ label: response.label, data: cleanData });
         })
         .fail(function( jqXHR, textStatus) {
             console.log('mfp -> error');
