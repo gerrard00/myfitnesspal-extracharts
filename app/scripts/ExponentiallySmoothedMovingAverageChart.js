@@ -1,75 +1,76 @@
-'use strict'
+'use strict';
 
-var gerrrard00 = gerrrard00 || {};
-gerrrard00.charts = gerrrard00.charts || {};
+/* global c3 */
 
-gerrrard00.charts.ExponentiallySmoothedMovingAverageChart = (function () {
-	var exponentialMovingAverageFieldName = "exponentialMovingAverage";
+var gerrard00 = gerrard00 || {};
+gerrard00.charts = gerrard00.charts || {};
 
-	//TODO: if we switch to d3, we can probably have the chart run this calculation as part of the chart generation
-	function calculateExponentialMovingAverage(currentObservation,
-		previousExponentialMovingAverage) {
+gerrard00.charts.ExponentiallySmoothedMovingAverageChart = (function () {
+    var exponentialMovingAverageFieldName = 'exponentialMovingAverage';
 
-			//hacker diet suggests .9
-			//TODO: make this configurable
-			var smoothingFactor = .9;
+    //TODO: if we switch to d3, we can probably have the chart run this calculation as part of the chart generation
+    function calculateExponentialMovingAverage(currentObservation,
+        previousExponentialMovingAverage) {
 
-			//inspired by hacker diet: 
-			//https://www.fourmilab.ch/hackdiet/www/subsubsection1_4_1_0_8_3.html
-			return previousExponentialMovingAverage + 
-				((1 - smoothingFactor) * 
-					(currentObservation - previousExponentialMovingAverage));
-	}
+            //hacker diet suggests 0.9
+            //TODO: make this configurable
+            var smoothingFactor = 0.9;
 
-	function displayChart( displaySelector, data ) {
+            //inspired by hacker diet: 
+            //https://www.fourmilab.ch/hackdiet/www/subsubsection1_4_1_0_8_3.html
+            return previousExponentialMovingAverage +
+                ((1 - smoothingFactor) *
+                    (currentObservation - previousExponentialMovingAverage));
+        }
 
-		data.forEach(function (currentEntry, index, array) {
+    function displayChart( displaySelector, data ) {
 
-			//if we are seeing the first entry...
-			currentEntry[exponentialMovingAverageFieldName] = (index === 0)
-			//use the current observation as the ema
-		    ? currentEntry.total
-		    //otherwise, use calculate the current ema using the previous value
-		    : calculateExponentialMovingAverage(currentEntry.total, 
-		    	array[index - 1][exponentialMovingAverageFieldName]);
+        data.forEach(function (currentEntry, index, array) {
 
-  		});
+            
+            currentEntry[exponentialMovingAverageFieldName] =
+                //if we are seeing the first entry, use the current observation as the ema
+                (index === 0) ? currentEntry.total
+                //otherwise, use calculate the current ema using the previous value
+                : calculateExponentialMovingAverage(currentEntry.total,
+                    array[index - 1][exponentialMovingAverageFieldName]);
 
-		//TODO: instead of modifying data, copy the data to viewModel
-		var viewModel = data;
+        });
 
-		//TODO: figure out the ticks on the x axis
-		//TODO: why aren't tooltips working?
-		//TODO: scatter for the real values? Default scatter has tiny points.
-		console.log(displaySelector);
+        //TODO: instead of modifying data, copy the data to viewModel
+        var viewModel = data;
 
-		var chart = c3.generate({
-			bindto: displaySelector,
-			data: {
-			    json: viewModel,
-			    keys: {
-			        x: 'date',
-			        value: ['total', exponentialMovingAverageFieldName]
-			    },
-			    types : {
-			      total : 'line'
-			    }
-			},
-			axis: {
-			    x: {
-			        type: 'timeseries'
-			    }
-			}
-		});
+        //TODO: figure out the ticks on the x axis
+        //TODO: scatter for the real values? Default scatter has tiny points.
+        console.log(displaySelector);
 
-		//TODO: add a real legend
+        var chart = c3.generate({
+            bindto: displaySelector,
+            data: {
+                json: viewModel,
+                keys: {
+                    x: 'date',
+                    value: ['total', exponentialMovingAverageFieldName]
+                },
+                types : {
+                    total : 'line'
+                }
+            },
+            axis: {
+                x: {
+                    type: 'timeseries'
+                }
+            }
+        });
 
-		console.log('finished generating chart');
+        //TODO: add a real legend
 
-		return chart;
-	}
+        console.log('finished generating chart');
 
-	return { 
-		displayChart : displayChart
-	};
+        return chart;
+    }
+
+    return {
+        displayChart : displayChart
+    };
 }());
