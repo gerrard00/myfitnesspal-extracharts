@@ -30,11 +30,15 @@
         "https://*/*"
       ],
       "js": [
+        "bower_components/d3/d3.js",
         "bower_components/c3/c3.js",
         "bower_components/jquery/dist/jquery.js",
         "scripts/MyFitnessPalService.js",
         "scripts/ExponentiallySmoothedMovingAverageChart.js",
         "scripts/contentscript.js"
+      ],
+      "css": [
+        "bower_components/c3/c3.css"
       ],
       "run_at": "document_end",
       "all_frames": false
