@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <!-- build:css styles/vendor.css -->
+    <!-- bower:css -->
+    <link href="../app/bower_components/c3/c3.css" rel="stylesheet">
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css styles/main.css -->
+    <link href="../app/styles/main.css" rel="stylesheet">
+    <!-- endbuild -->
+  </head>
+  <body>
+    <h1>Test Date Style Hack</h1>
+
+    <!-- build:js scripts/vendor.js -->
+    <!-- bower:js -->
+    <div id="mocha"></div>
+  <script src="../app/bower_components/mocha/mocha.js"></script>
+  <script>mocha.setup('bdd');</script>
+  <script src="../app/bower_components/chai/chai.js"></script>
+  <script>
+    var assert = chai.assert;
+    var expect = chai.expect;
+    var should = chai.should();
+  </script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:js scripts/popup.js -->
+    <script src="../app/scripts/DatePartsHelperFactory.js"></script>
+    <!-- endbuild -->
+
+    <script type="text/javascript">
+
+    function testUS() {
+
+        var firstRawInput = '07/20';
+        var firstTargetDate = new Date(2015, 6, 20);
+
+        var sut = gerrard00.DatePartsHelperFactory;
+
+        var helper = sut.getDatePartsHelper(firstRawInput, 
+            firstTargetDate);
+
+        var result = helper('07/19');
+
+        result.should.have.property('month', 6);
+        result.should.have.property('day', 19);
+
+        console.log('Done!');
+    }
+
+    function testEuro() {
+
+        var firstRawInput = '20/07';
+        var firstTargetDate = new Date(2015, 6, 20);
+
+        var sut = gerrard00.DatePartsHelperFactory;
+
+        var helper = sut.getDatePartsHelper(firstRawInput, 
+            firstTargetDate);
+
+        var result = helper('19/07');
+
+        result.should.have.property('month', 6);
+        result.should.have.property('day', 19);
+
+        console.log('Done!');
+    }
+
+    testUS();
+    testEuro();
+    </script>
+  </body>
+</html>
