@@ -11,8 +11,6 @@
 
 /* end automatically added by generator */
 
-console.log('Hello from background!');
-
 var lastSeenUrl;
 
 chrome.webRequest.onCompleted.addListener(
