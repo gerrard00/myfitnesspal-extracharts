@@ -26,22 +26,30 @@ gerrard00.MyFitnessPalDataScrubber = (function () {
 
         cleanData = cleanData.reverse();
 
-        cleanData.forEach(function(entry) {
-            var rawDate = entry.date;
+        //we don't know if the dates are US or Euro style.
+        //for now, use this helper. pass the last entries date (which we assume is today)
+        //and today's date. This will go bang if the current date is ever not the last
+        //date in our result set.
+        var datePartsHelper = gerrard00.DatePartsHelperFactory.
+            getDatePartsHelper(cleanData[0].date, new Date());
 
-            var currentEntryMonth = rawDate.split('/')[0];
+        cleanData.forEach(function(entry) {
+            //use our helper to get the correct date parts
+            var rawDateParts = datePartsHelper(entry.date);
+
+            var currentEntryMonth = rawDateParts.month;
          
             if (currentEntryMonth !== lastSeenMonth) {
 
                 lastSeenMonth = currentEntryMonth;
 
-                //we just crossed a year boundary
-                if (currentEntryMonth === '12') {
+                //we just crossed a year boundary (note javascript month 11 is December)
+                if (currentEntryMonth === 11) {
                     currentYear--;
                 }
             }
 
-            var dateToUse = new Date(rawDate + '/' + currentYear);
+            var dateToUse = new Date(currentYear, rawDateParts.month, rawDateParts.day);
 
             entry.date = dateToUse;
         });
