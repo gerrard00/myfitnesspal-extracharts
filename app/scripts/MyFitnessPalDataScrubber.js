@@ -5,6 +5,17 @@ gerrard00.MyFitnessPalDataScrubber = (function () {
     'use strict';
 
     function cleanRawData(rawData) {
+
+      //we don't know if the dates are US or Euro style.
+      //for now, use this helper. pass the last entries date (which we assume is today)
+      //and today's date. This will go bang if the current date is ever not the last
+      //date in our result set. Note that we do this before stripping repeated data
+      //from the list, because we need to have today's reading to determine which
+      //helper to use
+
+      var datePartsHelper = gerrard00.DatePartsHelperFactory.
+          getDatePartsHelper(rawData[rawData.length - 1].date, new Date());
+
         //strip data with 0 totals. mfp returns entries for the entire date ranage,
         //even if the user hasn't tracked anything for a particular date
         var cleanData  =
@@ -26,19 +37,12 @@ gerrard00.MyFitnessPalDataScrubber = (function () {
 
         cleanData = cleanData.reverse();
 
-        //we don't know if the dates are US or Euro style.
-        //for now, use this helper. pass the last entries date (which we assume is today)
-        //and today's date. This will go bang if the current date is ever not the last
-        //date in our result set.
-        var datePartsHelper = gerrard00.DatePartsHelperFactory.
-            getDatePartsHelper(cleanData[0].date, new Date());
-
         cleanData.forEach(function(entry) {
             //use our helper to get the correct date parts
             var rawDateParts = datePartsHelper(entry.date);
 
             var currentEntryMonth = rawDateParts.month;
-         
+
             if (currentEntryMonth !== lastSeenMonth) {
 
                 lastSeenMonth = currentEntryMonth;
