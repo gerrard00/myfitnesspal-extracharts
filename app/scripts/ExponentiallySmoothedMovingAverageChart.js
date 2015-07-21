@@ -72,7 +72,7 @@ gerrard00.charts.ExponentiallySmoothedMovingAverageChart = (function () {
                 }
             },
             tooltip: {
-                grouped: false
+                grouped: true
             },
             point: {
                 r: 5
