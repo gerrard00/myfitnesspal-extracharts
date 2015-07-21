@@ -13,7 +13,7 @@ gerrard00.MyFitnessPalDataScrubber = (function () {
       //from the list, because we need to have today's reading to determine which
       //helper to use
 
-      var datePartsHelper = gerrard00.DatePartsHelperFactory.
+        var datePartsHelper = gerrard00.DatePartsHelperFactory.
           getDatePartsHelper(rawData[rawData.length - 1].date, new Date());
 
         //strip data with 0 totals. mfp returns entries for the entire date ranage,
